@@ -2,8 +2,8 @@ const { defineConfig } = require('@vue/cli-service')
 const fetch = require("node-fetch")
 const bodyParser = require('body-parser')
 
-const PRODUCT_SERVICE_URL = (process.env.VUE_APP_PRODUCT_SERVICE_URL || "http://172.19.0.2:3002/")
-const ORDER_SERVICE_URL = (process.env.VUE_APP_ORDER_SERVICE_URL || "http://172.19.0.5:3000/")
+const PRODUCT_SERVICE_URL = (process.env.VUE_APP_PRODUCT_SERVICE_URL || "http://product-service:3002/")
+const ORDER_SERVICE_URL = (process.env.VUE_APP_ORDER_SERVICE_URL || "http://order-service:3000/")
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -12,9 +12,9 @@ module.exports = defineConfig({
     host: '0.0.0.0',
     allowedHosts: 'all',
     client: false,
-    webSocketServer: false,    
+    webSocketServer: false,
     setupMiddlewares: (middlewares, devServer) => {
-      
+
       if (!devServer) {
         throw new Error('webpack-dev-server is not defined');
       }
@@ -24,9 +24,9 @@ module.exports = defineConfig({
       // Health check
       devServer.app.get('/health', (_, res) => {
         const version = process.env.APP_VERSION || '0.1.0'
-        res.send({ status: 'ok', version: version})
+        res.send({ status: 'ok', version: version })
       })
-      
+
       devServer.app.get('/products', (_, res) => {
         fetch(`${PRODUCT_SERVICE_URL}`)
           .then(response => response.json())
