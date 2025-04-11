@@ -2,8 +2,8 @@ const { defineConfig } = require('@vue/cli-service')
 const fetch = require("node-fetch")
 const bodyParser = require('body-parser')
 
-const PRODUCT_SERVICE_URL = (process.env.VUE_APP_PRODUCT_SERVICE_URL || "http://product-service:3002/")
-const ORDER_SERVICE_URL = (process.env.VUE_APP_ORDER_SERVICE_URL || "http://order-service:3000/")
+const PRODUCT_SERVICE_URL = (process.env.PRODUCT_SERVICE_URL || "http://product-service:3002/")
+const ORDER_SERVICE_URL = (process.env.ORDER_SERVICE_URL || "http://order-service:3000/")
 
 module.exports = defineConfig({
   transpileDependencies: true,
